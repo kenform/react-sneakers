@@ -51,7 +51,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 					<img
 						onClick={onClose}
 						className='cu-p'
-						src='img/btn-remove.svg'
+						src={process.env.PUBLIC_URL + '/img/btn-remove.svg'}
 						alt='Close'
 					/>
 				</h2>
@@ -62,22 +62,25 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 							{items.map((obj) => (
 								<div
 									key={obj.id}
-									className='cartItem d-flex align-center mb-20'
+									className='cartItem d-flex  mb-20'
 								>
 									<div
-										style={{ backgroundImage: `url(${obj.imageUrl})` }}
+										style={{
+											backgroundImage: `url(${process.env.PUBLIC_URL + "/" + obj.imageUrl
+											})`,
+										}}
 										className='cartItemImg'
 									></div>
 
-									<div className='mr-20 flex'>
+									<div className='cartItem__text flex'>
 										<p className='mb-5'>{obj.title}</p>
 										<b>{obj.price} руб.</b>
 									</div>
 									<img
 										onClick={() => onRemove(obj.id)}
 										className='removeBtn'
-										src='img/btn-remove.svg'
 										alt='Remove'
+										src={process.env.PUBLIC_URL + '/img/btn-remove.svg'}
 									/>
 								</div>
 							))}
@@ -100,7 +103,11 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 								onClick={onClickOrder}
 								className='greenButton'
 							>
-								Оформить заказ <img src='img/arrow.svg' alt='Arrow' />
+								Оформить заказ{' '}
+								<img
+									src={process.env.PUBLIC_URL + '/img/arrow.svg'}
+									alt='Arrow'
+								/>
 							</button>
 						</div>
 					</div>
@@ -113,7 +120,9 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 								: 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
 						}
 						image={
-							isOrderComplete ? 'img/complete-order.jpg' : 'img/empty-cart.jpg'
+							isOrderComplete
+								? process.env.PUBLIC_URL + '/img/complete-order.jpg'
+								: process.env.PUBLIC_URL + '/img/empty-cart.jpg'
 						}
 					/>
 				)}

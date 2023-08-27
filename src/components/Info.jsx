@@ -10,9 +10,10 @@ const Info = ({ title, image, description }) => {
 			<img className='mb-20' width='120px' src={image} alt='Empty' />
 			<h2>{title}</h2>
 			<p className='opacity-6'>{description}</p>
+
 			<Link to='/'>
 				<button onClick={() => setCartOpened(false)} className='greenButton'>
-					<img src='img/arrow.svg' alt='Arrow' />
+					<img src={process.env.PUBLIC_URL + '/img/arrow.svg'} alt='Arrow' />
 					Вернуться назад
 				</button>
 			</Link>

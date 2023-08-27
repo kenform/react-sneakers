@@ -4,6 +4,9 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #e7f6ff;
 }
+$tablet: 991.98px;
+$mobile: 767.98px;
+$mobileSmall: 560px;
 
 * {
 	font-family: 'Inter', system-ui;
@@ -11,26 +14,56 @@ body {
 
 .wrapper {
 	background: #ffffff;
+
 	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
-	border-radius: 20px;
 	max-width: 1080px;
 	margin: 50px auto;
 }
 
+.header {
+	position: fixed;
+	top: -50px;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 9;
+	background: #fff;
+}
 header {
 	border-bottom: 1px solid #eaeaea;
-
+	padding: 40px;
 	h3,
 	p {
 		margin: 0;
 	}
+	@media (max-width: $mobile) {
+		padding: 20px 30px;
+	}
+}
+
+.total__price {
+	@media (max-width: $mobileSmall) {
+		display: none;
+	}
+}
+.logo__text {
+	@media (max-width: $mobile) {
+		h3 {
+			font-size: 16px;
+		}
+		p {
+			font-size: 14px;
+		}
+	}
+	@media (max-width: $mobileSmall) {
+		display: none;
+	}
 }
 
 .actions-header {
-	gap: 30px;
+	gap: 40px;
 
 	&__icon {
-		gap: 30px;
 		position: relative;
 		padding: 40px 0 !important;
 		margin: -40px 0 !important;
@@ -59,13 +92,38 @@ header {
 		}
 	}
 }
-.clear {
-	ul {
+
+.title {
+	@media (max-width: $mobile) {
+		font-size: 24px;
+		text-align: center;
+		padding-top: 20px;
 	}
 }
 .content {
+	border-radius: 10px;
+	padding: 100px 30px 0px 30px;
 	h1 {
 		margin: 0;
+	}
+	@media (max-width: $mobile) {
+		padding: 40px 30px 0px 30px;
+	}
+}
+.cards__content {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+	place-items: center;
+	@media (max-width: $tablet) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media (max-width: $mobile) {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+	@media (max-width: $mobileSmall) {
+		grid-template-columns: repeat(1, 1fr);
 	}
 }
 
@@ -100,16 +158,21 @@ header {
 .search-block {
 	border: 1px solid #f3f3f3;
 	border-radius: 10px;
-	padding: 0 15px;
+	padding: 0 25px;
 	position: relative;
-
+	.search__icon {
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		top: 17px;
+		left: 10px;
+	}
 	.clear {
 		position: absolute;
+		width: 45px;
+		height: 45px;
+		top: 0;
 		right: 0;
-		width: 18px;
-		height: 18px;
-		top: 14px;
-		right: 15px;
 	}
 
 	input {
@@ -118,8 +181,17 @@ header {
 		font-size: 16px;
 		width: 200px;
 	}
+	@media (max-width: $mobile) {
+		width: 100%;
+	}
 }
-
+.search-container {
+	display: flex;
+	gap: 10px;
+	@media (max-width: $mobile) {
+		flex-direction: column;
+	}
+}
 .cartTotalBlock {
 	ul {
 		display: block;
@@ -194,7 +266,10 @@ header {
 	border-radius: 20px;
 	overflow: hidden;
 	padding: 20px;
-
+	align-items: center;
+	@media (max-width: $mobileSmall) {
+		align-items: start;
+	}
 	.cartItemImg {
 		height: 70px;
 		width: 70px;
@@ -202,10 +277,24 @@ header {
 		background-position: 0 -3px;
 		background-repeat: no-repeat;
 		margin-right: 20px;
+		@media (max-width: $mobileSmall) {
+			margin-right: 10px;
+		}
+	}
+	&__text {
+		margin-right: 20px;
+		@media (max-width: $mobileSmall) {
+			margin-right: 10px;
+			p {
+				font-size: 14px;
+			}
+			b {
+				font-size: 14px;
+			}
+		}
 	}
 
 	p {
-		font-size: 16px;
 		margin: 0;
 	}
 
