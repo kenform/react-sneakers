@@ -2,6 +2,7 @@ import React from 'react'
 import ContentLoader from 'react-content-loader'
 
 import AppContext from '../../context'
+import { getPublicImageUrl, getSneakerImageUrl } from '../../utils/imagePath'
 
 import styles from './Card.module.scss'
 
@@ -62,7 +63,8 @@ function Card({
 					<img
 						width='100%'
 						height={135}
-						src={process.env.PUBLIC_URL +"/"+ imageUrl}
+						src={getPublicImageUrl(imageUrl, id)}
+						onError={(event) => { event.currentTarget.src = process.env.PUBLIC_URL + '/' + getSneakerImageUrl(id) }}
 						alt='Sneakers'
 					/>
 					<h5>{title}</h5>

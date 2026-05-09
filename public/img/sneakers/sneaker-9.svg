@@ -1,0 +1,13 @@
+<svg width="520" height="360" viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="360" rx="56" fill="#F2F2F2"/>
+  <circle cx="115" cy="78" r="64" fill="#A1A1AA" opacity=".25"/>
+  <circle cx="418" cy="282" r="78" fill="#A1A1AA" opacity=".22"/>
+  <path d="M82 222c34-8 69-29 104-80 19 45 56 78 132 94 52 11 86 39 101 76H74c-6-33-3-78 8-90Z" fill="#A1A1AA" stroke="#202124" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M80 278h341c13 0 24 11 24 24v11H67v-19c0-9 5-15 13-16Z" fill="white" stroke="#202124" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M183 145c27 33 70 58 137 74" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <path d="M217 184h58M239 206h74" stroke="#202124" stroke-width="8" stroke-linecap="round" opacity=".32"/>
+  <circle cx="143" cy="299" r="7" fill="#202124"/>
+  <circle cx="190" cy="299" r="7" fill="#202124"/>
+  <circle cx="237" cy="299" r="7" fill="#202124"/>
+  <text x="260" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#202124" opacity=".72">Mono Flex</text>
+</svg>
