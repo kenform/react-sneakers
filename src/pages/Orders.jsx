@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import '../index.scss'
 import { getPublicImageUrl } from '../utils/imagePath'
 
@@ -25,38 +24,21 @@ const normalizeOrder = (order) => ({
 })
 
 function Orders() {
-  const [orders, setOrders] = React.useState(() => readOrders().map(normalizeOrder))
-  const [isLoading, setIsLoading] = React.useState(true)
+  const [orders, setOrders] = React.useState([])
 
   React.useEffect(() => {
-    ;(async () => {
-      try {
-        const { data } = await axios.get('https://64e4a988c555638029139625.mockapi.io/orders')
-        const remoteOrders = Array.isArray(data) ? data.map(normalizeOrder) : []
-        const localOrders = readOrders().map(normalizeOrder)
-
-        const uniqueOrders = [...localOrders, ...remoteOrders].reduce((acc, order) => {
-          if (!acc.some((item) => String(item.id) === String(order.id))) {
-            acc.push(order)
-          }
-          return acc
-        }, [])
-
-        setOrders(uniqueOrders)
-        writeOrders(uniqueOrders)
-      } catch (error) {
-        console.warn('Orders API unavailable; using local orders.', error)
-        setOrders(readOrders().map(normalizeOrder))
-      } finally {
-        setIsLoading(false)
-      }
-    })()
+    const localOrders = readOrders().map(normalizeOrder)
+    setOrders(localOrders)
+    writeOrders(localOrders)
   }, [])
 
-  const deleteOrder = (orderId) => {
-    const nextOrders = orders.filter((order) => String(order.id) !== String(orderId))
+  const updateOrders = (nextOrders) => {
     setOrders(nextOrders)
     writeOrders(nextOrders)
+  }
+
+  const deleteOrder = (orderId) => {
+    updateOrders(orders.filter((order) => String(order.id) !== String(orderId)))
   }
 
   const deleteOrderItem = (orderId, itemId) => {
@@ -64,7 +46,7 @@ function Orders() {
       .map((order) => {
         if (String(order.id) !== String(orderId)) return order
 
-        const nextItems = order.items.filter((item) => String(item.id) !== String(itemId))
+        const nextItems = order.items.filter((item, index) => `${item.id}-${index}` !== String(itemId))
         return {
           ...order,
           items: nextItems,
@@ -73,8 +55,11 @@ function Orders() {
       })
       .filter((order) => order.items.length > 0)
 
-    setOrders(nextOrders)
-    writeOrders(nextOrders)
+    updateOrders(nextOrders)
+  }
+
+  const clearHistory = () => {
+    updateOrders([])
   }
 
   return (
@@ -87,18 +72,13 @@ function Orders() {
         </div>
 
         {orders.length > 0 && (
-          <button className='ordersPage__clear' onClick={() => {
-            setOrders([])
-            writeOrders([])
-          }}>
+          <button className='ordersPage__clear' onClick={clearHistory}>
             Очистить историю
           </button>
         )}
       </div>
 
-      {isLoading ? (
-        <div className='ordersPage__empty'>Загружаем заказы...</div>
-      ) : orders.length === 0 ? (
+      {orders.length === 0 ? (
         <div className='ordersPage__empty'>
           <h2>Заказов пока нет</h2>
           <p>Добавьте кроссовки в корзину и оформите заказ — он появится здесь.</p>
@@ -120,14 +100,14 @@ function Orders() {
               </div>
 
               <div className='orderCard__items'>
-                {order.items.map((item) => (
-                  <article className='orderItem' key={`${order.id}-${item.id}`}>
+                {order.items.map((item, index) => (
+                  <article className='orderItem' key={`${order.id}-${item.id}-${index}`}>
                     <img src={getPublicImageUrl(item.imageUrl, item.id)} alt={item.title} />
                     <div>
                       <h3>{item.title}</h3>
                       <p>{item.price} руб.</p>
                     </div>
-                    <button onClick={() => deleteOrderItem(order.id, item.id)}>Удалить</button>
+                    <button onClick={() => deleteOrderItem(order.id, `${item.id}-${index}`)}>Удалить</button>
                   </article>
                 ))}
               </div>
