@@ -1004,3 +1004,68 @@ body::after {
 		}
 	}
 }
+
+/* === React Sneakers mobile catalog centering fix === */
+.cards__content {
+	justify-items: center;
+	align-items: stretch;
+}
+
+@media (max-width: 767.98px) {
+	.content {
+		padding-left: 18px;
+		padding-right: 18px;
+	}
+
+	.title {
+		width: 100%;
+		text-align: center;
+	}
+
+	.search-container {
+		align-items: center;
+		margin-bottom: 30px !important;
+	}
+
+	.search-block {
+		width: min(100%, 292px);
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.cards__content {
+		width: 100%;
+		grid-template-columns: 1fr;
+		justify-items: center;
+		gap: 18px;
+	}
+}
+
+@media (max-width: 430px) {
+	.content {
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.cards__content {
+		max-width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.storeHero {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+@media (max-width: 380px) {
+	.content {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+	.search-block {
+		width: 100%;
+	}
+}
