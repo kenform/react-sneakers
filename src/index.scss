@@ -961,3 +961,46 @@ body::after {
 		padding: 28px 20px;
 	}
 }
+
+/* === React Sneakers cart drawer UX fix === */
+.cartTotalBlock {
+	margin-top: 4px;
+	padding-top: 14px;
+	border-top: 1px solid rgba(136, 165, 180, 0.22);
+
+	ul {
+		margin-bottom: 22px !important;
+	}
+
+	.greenButton {
+		margin-top: 4px;
+	}
+}
+
+.cartClearButton {
+	margin-bottom: 16px;
+}
+
+.items {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(98, 201, 147, .45) transparent;
+}
+
+.items::-webkit-scrollbar {
+	width: 6px;
+}
+
+.items::-webkit-scrollbar-thumb {
+	background: rgba(98, 201, 147, .45);
+	border-radius: 999px;
+}
+
+@media (max-width: 560px) {
+	.cartTotalBlock {
+		padding-top: 12px;
+
+		ul {
+			margin-bottom: 18px !important;
+		}
+	}
+}

@@ -32,7 +32,7 @@ $mobileSmall: 560px;
 	top: 0;
 	right: 0;
 	width: min(430px, 100%);
-	min-height: 100%;
+	min-height: 100dvh;
 	background: #ffffff;
 	padding: 34px;
 	transform: translateX(100%);
@@ -45,9 +45,11 @@ $mobileSmall: 560px;
 	}
 
 	.items {
-		flex: 1;
+		flex: 0 0 auto;
+		max-height: min(46vh, 430px);
 		overflow: auto;
-		margin-bottom: 26px;
+		margin-bottom: 18px;
+		padding-right: 4px;
 	}
 
 	h2 {
