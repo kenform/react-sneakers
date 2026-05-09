@@ -7,91 +7,97 @@ import { getPublicImageUrl, getSneakerImageUrl } from '../../utils/imagePath'
 import styles from './Card.module.scss'
 
 function Card({
-	id,
-	title,
-	imageUrl,
-	price,
-	onFavorite,
-	onPlus,
-	favorited = false,
-	loading = false,
+  id,
+  title,
+  imageUrl,
+  price,
+  onFavorite,
+  onPlus,
+  favorited = false,
+  loading = false,
 }) {
-	const { isItemAdded } = React.useContext(AppContext)
-	const [isFavorite, setIsFavorite] = React.useState(favorited)
-	const obj = { id, title, imageUrl, price }
+  const { isItemAdded } = React.useContext(AppContext)
+  const [isFavorite, setIsFavorite] = React.useState(favorited)
+  const obj = { id, title, imageUrl, price }
 
-	const onClickPlus = () => {
-		onPlus(obj)
-	}
+  const onClickPlus = () => {
+    onPlus(obj)
+  }
 
-	const onClickFavorite = () => {
-		onFavorite(obj)
-		setIsFavorite(!isFavorite)
-	}
+  const onClickFavorite = () => {
+    onFavorite(obj)
+    setIsFavorite(!isFavorite)
+  }
 
-	return (
-		<div className={styles.card}>
-			{loading ? (
-				<ContentLoader
-					speed={2}
-					width={155}
-					height={250}
-					viewBox='0 0 155 265'
-					backgroundColor='#f3f3f3'
-					foregroundColor='#ecebeb'
-				>
-					<rect x='1' y='0' rx='10' ry='10' width='155' height='155' />
-					<rect x='0' y='167' rx='5' ry='5' width='155' height='15' />
-					<rect x='0' y='187' rx='5' ry='5' width='100' height='15' />
-					<rect x='1' y='234' rx='5' ry='5' width='80' height='25' />
-					<rect x='124' y='230' rx='10' ry='10' width='32' height='32' />
-				</ContentLoader>
-			) : (
-				<>
-					{onFavorite && (
-						<div className={styles.favorite} onClick={onClickFavorite}>
-							<img
-								src={
-									isFavorite
-										? process.env.PUBLIC_URL + '/img/liked.svg'
-										: process.env.PUBLIC_URL + '/img/unliked.svg'
-								}
-								alt='Unliked'
-							/>
-						</div>
-					)}
-					<img
-						width='100%'
-						height={135}
-						src={getPublicImageUrl(imageUrl, id)}
-						onError={(event) => { event.currentTarget.src = process.env.PUBLIC_URL + '/' + getSneakerImageUrl(id) }}
-						alt='Sneakers'
-					/>
-					<h5>{title}</h5>
-					<div className='d-flex justify-between align-center'>
-						<div className='d-flex flex-column'>
-							<span>Цена:</span>
-							<b>{price} руб.</b>
-						</div>
-						{onPlus && (
-							<img
-							width={40}
-							height={40}
-								className={styles.plus}
-								onClick={onClickPlus}
-								src={
-									isItemAdded(id)
-										? process.env.PUBLIC_URL + '/img/btn-checked.svg'
-										: process.env.PUBLIC_URL + '/img/btn-plus.svg'
-								}
-								alt='Plus'
-							/>
-						)}
-					</div>
-				</>
-			)}
-		</div>
-	)
+  return (
+    <div className={styles.card}>
+      {loading ? (
+        <ContentLoader
+          speed={2}
+          width={180}
+          height={270}
+          viewBox='0 0 180 270'
+          backgroundColor='#f3f7fb'
+          foregroundColor='#e7eef5'
+        >
+          <rect x='0' y='0' rx='22' ry='22' width='180' height='145' />
+          <rect x='0' y='165' rx='7' ry='7' width='160' height='16' />
+          <rect x='0' y='190' rx='7' ry='7' width='115' height='16' />
+          <rect x='0' y='238' rx='8' ry='8' width='85' height='26' />
+          <rect x='140' y='232' rx='12' ry='12' width='38' height='38' />
+        </ContentLoader>
+      ) : (
+        <>
+          {onFavorite && (
+            <button className={styles.favorite} onClick={onClickFavorite} aria-label='Добавить в избранное'>
+              <img
+                src={
+                  isFavorite
+                    ? process.env.PUBLIC_URL + '/img/liked.svg'
+                    : process.env.PUBLIC_URL + '/img/unliked.svg'
+                }
+                alt='Favorite'
+              />
+            </button>
+          )}
+
+          <div className={styles.imageBox}>
+            <img
+              src={getPublicImageUrl(imageUrl, id)}
+              onError={(event) => {
+                event.currentTarget.src = process.env.PUBLIC_URL + '/' + getSneakerImageUrl(id)
+              }}
+              alt={title}
+            />
+          </div>
+
+          <h5>{title}</h5>
+
+          <div className={styles.cardBottom}>
+            <div className='d-flex flex-column'>
+              <span>Цена:</span>
+              <b>{price} руб.</b>
+            </div>
+
+            {onPlus && (
+              <button className={styles.plusButton} onClick={onClickPlus} aria-label='Добавить в корзину'>
+                <img
+                  width={24}
+                  height={24}
+                  src={
+                    isItemAdded(id)
+                      ? process.env.PUBLIC_URL + '/img/btn-checked.svg'
+                      : process.env.PUBLIC_URL + '/img/btn-plus.svg'
+                  }
+                  alt='Plus'
+                />
+              </button>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  )
 }
 
 export default Card
