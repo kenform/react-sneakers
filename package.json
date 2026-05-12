@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
-    "predeploy": "yarn run build"
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +46,8 @@
     "@svgr/webpack": "^8.0.1",
     "sass": "^1.65.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  }
+  },
+  "homepage": "https://kenform.github.io/react-sneakers",
+  "description": "React Sneakers — учебный интернет-магазин кроссовок на React с корзиной, избранным, заказами и fallback-данными.",
+  "author": "Kenform"
 }

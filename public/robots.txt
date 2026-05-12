@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kenform.github.io/react-sneakers/sitemap.xml
